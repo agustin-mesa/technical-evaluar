@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
 .App {
   background-color: #212121;
 }
@@ -8,42 +27,19 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 20px 15%;
+  padding: 150px 5%;
 }
 
-header h1 {
-  font-size: 3em;
-  text-align: center;
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
 }
 
-.search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 50px 0;
-  gap: 20px;
-}
+@media only screen and (max-width: 800px) {
+  body {
+    font-size: 14px;
+  }
 
-.search input {
-  background: #212121;
-  border: 1px solid #B3B3B3;
-  border-radius: 8px;
-  outline: none;
-  padding: 10px;
-  font-size: 1.2em;
-  width: 40%;
-}
-
-.search button {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  background: rgba(220, 206, 206, 0.14);
-  border-radius: 10px;
-  outline: none;
-  border: none;
-}
-
-.search button img {
-  width: 40px;
+  .content {
+    padding: 100px 5%;
+  }
 }

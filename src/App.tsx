@@ -1,42 +1,32 @@
 import React from 'react'
 import './App.css'
-import Items from './components/Items/Items'
+import Cards from './components/Cards/Cards'
+import Header from './components/Header/Header'
+import Search from './components/Search/Search'
+import { DataCharacter, getCharacters } from './services/characters.api'
+import { Character } from './types'
 
-function App() {
+const App: React.FC = () => {
 
-  const [items, setItems] = React.useState([])
-  const [filter, setFilter] = React.useState<string>("");
+  // Estado para guardar los datos originales
+  const [items, setItems] = React.useState<Character[]>([])
+  // Estado para guardar los datos filtrados
+  const [filteredItems, setFilteredItems] = React.useState<Character[]>([]);
 
   React.useEffect(() => {
-    const getFetch = async () => {
-      await fetch("https://rickandmortyapi.com/api/character")
-        .then((res) => res.json())
-        .then((data) => setItems(data.results))
-    }
-
-    getFetch()
+    getCharacters().then((res: DataCharacter) => {
+      const characters = res.data.results.map((character: Character) => character)
+      setItems(characters)
+      setFilteredItems(characters)
+    })
   }, [])
-
-  const onSearch = (e) => {
-    e.preventDefault()
-    const newItems = items.filter(item => item.name === filter);
-
-    console.log(newItems)
-  }
 
   return (
     <div className="App">
       <div className="content">
-        <header>
-          <h1>The Rick and Morty API</h1>
-        </header>
-        <div className="search">
-          <input type="text" onChange={(e) => setFilter(e.target.value)}/>
-          <button onClick={onSearch}>
-            <img src="/assets/search.svg" alt="Search" />
-          </button>
-        </div>
-        <Items items={items} />
+        <Header />
+        <Search items={items} setFilteredItems={setFilteredItems} />
+        <Cards items={filteredItems} />
       </div>
     </div>
   )
